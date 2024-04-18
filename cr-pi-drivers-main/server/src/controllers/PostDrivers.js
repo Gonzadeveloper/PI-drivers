@@ -7,9 +7,10 @@ async function createDriver(req, res) {
 
     let teamsDB = await Teams.findAll();
 
-    // como teams  lo recibo en string lo vou a convertir en array 
+    // como teams  lo recibo en string lo voy a convertir en array
+    // ahora teams ya viene en un array por lo que no es necesario el split
 
-    let convertTeamsArray = teams.split(' ')
+    let convertTeamsArray = teams
     
     // Verificar si todos los equipos existen
     const teamNames = teamsDB.map(team => team.name);

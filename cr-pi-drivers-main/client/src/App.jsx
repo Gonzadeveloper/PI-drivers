@@ -15,10 +15,23 @@ function App() {
   const [nameFilter, setNameFilter] = useState([]);
   const [driversData, setDriversData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [teamNames, setTeamNames] = useState([]);// estado para traer todos los nombres de los team para el filtro 
 
   const handleNameFilter = (e) => {
     setNameFilter(e.target.value);
   };
+
+    // useEffect para setear el etado de teamNames con todos los equipos 
+    useEffect(() => {
+      // Llamar a la API para obtener los nombres de los equipos
+      axios.get('http://localhost:3001/teamNames')
+        .then(response => {
+          setTeamNames(response.data);
+        })
+        .catch(error => {
+          console.error('Error fetching team names:', error);
+        });
+    }, []);
 
   useEffect(() => {
     
@@ -46,9 +59,9 @@ function App() {
       <Routes>
         <Route>
           <Route path="/" element={<AccessButton setAccess={setAccess} navigate={navigate} />} />
-          <Route path='/home' element={<LayoutHome setNameFilter={setNameFilter} nameFilter={nameFilter} handleNameFilter={handleNameFilter} driversData={driversData} currentPage={currentPage} setCurrentPage={setCurrentPage}/>}/>
+          <Route path='/home' element={<LayoutHome teamNames={teamNames} setNameFilter={setNameFilter} nameFilter={nameFilter} handleNameFilter={handleNameFilter} driversData={driversData} currentPage={currentPage} setCurrentPage={setCurrentPage}/>}/>
           <Route path="/detail/:id" element={<Detail />} />   
-          <Route path='/AtivitiForm' element= {<Form/>}/>     
+          <Route path='/AtivitiForm' element= {<Form teamNames={teamNames}/>}/>     
         </Route>
       </Routes>
     </div>
