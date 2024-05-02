@@ -1,12 +1,12 @@
 const axios = require("axios");
 const server = require("./src/server");
 const { conn } = require('./src/db.js');
-const PORT = 3001;
 const express = require('express');
 const bodyParser = require('body-parser');
 const { loadTeamsFromAPI } = require('./src/controllers/getAllTeams.js');
-
 const app = express()
+const PORT =  process.env.PORT 
+require ("dotenv/config") 
 
 // Middleware para procesar JSON y URL-encoded bodies
 app.use(bodyParser.json());

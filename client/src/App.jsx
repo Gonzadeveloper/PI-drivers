@@ -24,7 +24,7 @@ function App() {
     // useEffect para setear el etado de teamNames con todos los equipos 
     useEffect(() => {
       // Llamar a la API para obtener los nombres de los equipos
-      axios.get('http://localhost:3001/teamNames')
+      axios.get(`${import.meta.env.VITE_ENDPOINT}/teamNames`)
         .then(response => {
           setTeamNames(response.data);
         })
@@ -35,7 +35,7 @@ function App() {
 
   useEffect(() => {
     
-    const URL = 'http://localhost:3001/drivers';
+    const URL = `${import.meta.env.VITE_ENDPOINT}/drivers`;
 
     const fetchData = async () => {
       try {

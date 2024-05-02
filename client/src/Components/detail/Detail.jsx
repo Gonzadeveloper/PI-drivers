@@ -11,7 +11,7 @@ function Detail(){
 
         const driverId = id.slice(1);
 
-        axios(`http://localhost:3001/drivers/${driverId}`)
+        axios(`${import.meta.env.VITE_ENDPOINT}/drivers/${driverId}`)
         .then(({ data }) => setDriversData(data)
         )
           return setDriversData({});

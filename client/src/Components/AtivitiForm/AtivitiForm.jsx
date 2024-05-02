@@ -23,7 +23,7 @@ import React, { useState, useEffect } from "react";
     
     useEffect(() => { //useEffect para traer los drivers de la db y setearlo al estado driversDbData
     
-      const URL = 'http://localhost:3001/driverFromApi';
+      const URL = `${import.meta.env.VITE_ENDPOINT}/driverFromApi`;
   
       const fetchData = async () => {
         try {
@@ -109,7 +109,7 @@ import React, { useState, useEffect } from "react";
         }
   
         try {
-          const crear = await fetch("http://localhost:3001/postDrivers", {
+          const crear = await fetch(`${import.meta.env.VITE_ENDPOINT}/postDrivers`, {
             method: "POST",
             headers: {
               Accept: "application/json",
