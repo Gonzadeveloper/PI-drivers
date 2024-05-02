@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const { loadTeamsFromAPI } = require('./src/controllers/getAllTeams.js');
 const app = express()
 const PORT =  process.env.PORT 
-require ("dotenv/config") 
+require ("dotenv").config();
 
 // Middleware para procesar JSON y URL-encoded bodies
 app.use(bodyParser.json());
