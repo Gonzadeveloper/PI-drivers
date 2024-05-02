@@ -8,9 +8,8 @@ const {
   DB
 } = process.env;
 
-const sequelize = new Sequelize(`${DB}`, {
+const sequelize = new Sequelize(DB, {
   logging: false, 
-  native: false, 
 });
 
 const { Driver, Teams } = sequelize.models;
