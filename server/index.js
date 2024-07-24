@@ -5,6 +5,7 @@ const { conn } = require('./src/db.js');
 const express = require('express');
 const bodyParser = require('body-parser');
 const { loadTeamsFromAPI } = require('./src/controllers/getAllTeams.js');
+
 const app = express()
 const PORT =  process.env.PORT 
 
