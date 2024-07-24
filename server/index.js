@@ -39,7 +39,7 @@ app.get('/', (req, res) => {
 });
 
 conn.sync({ force: false }).then(() => {
-  loadTeamsFromAPI();
+  //loadTeamsFromAPI();
   app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
   });
