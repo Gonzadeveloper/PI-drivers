@@ -12,6 +12,9 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${port}`);
+});
 // Middleware para procesar JSON y URL-encoded bodies
 // app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: true }));
