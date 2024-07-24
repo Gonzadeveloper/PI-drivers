@@ -27,7 +27,7 @@
 const bodyParser = require('body-parser');
 const { conn } = require('./src/db.js');
 const { loadTeamsFromAPI } = require('./src/controllers/getAllTeams.js');
-const server = require("./src/server");
+//const server = require("./src/server");
 
 
 const express = require('express');
