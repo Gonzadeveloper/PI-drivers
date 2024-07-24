@@ -38,10 +38,5 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-conn.sync({ force: false }).then(() => {
-  //loadTeamsFromAPI();
-  app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
-  });
-}).catch(error => console.error(error));
+
 
