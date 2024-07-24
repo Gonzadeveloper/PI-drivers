@@ -23,11 +23,11 @@
 
 
 //codigo viejo
-// require ("dotenv").config();
+require ("dotenv").config();
 const bodyParser = require('body-parser');
-//const { conn } = require('./src/db.js');
+const { conn } = require('./src/db.js');
 //const { loadTeamsFromAPI } = require('./src/controllers/getAllTeams.js');
-//const server = require("./src/server");
+const server = require("./src/server");
 
 
 const express = require('express');
@@ -38,7 +38,10 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+conn.sync({ force: false }).then(() => {
+  loadTeamsFromAPI();
+  app.listen(PORT, () => {
+    console.log(`Server listening on port ${PORT}`);
+  });
+}).catch(error => console.error(error));
 
