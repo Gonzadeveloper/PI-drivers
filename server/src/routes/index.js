@@ -20,6 +20,7 @@ router.post('/postDrivers', createDriver);
 router.get('/drivers/name/:name', getDriverByName);
 
 router.get('/driverFromApi', getAllDrivers);
+
 router.get('/load-teams', async (req, res) => {
     try {
       await loadTeamsFromAPI();

@@ -318,7 +318,7 @@ export default function Layout({
   teamNames
 }) {
 
-  const itemsPerPage = 9;
+  const itemsPerPage = 10;
   const [filteredDrivers, setFilteredDrivers] = useState([]); //estado para la busqueda por nombre
   const [totalPages, setTotalPages] = useState(1);// estado para actualizar las paginas al fitlrar 
   const [teamFilter, setTeamFilter] = useState("All");//estado para el filtro 
