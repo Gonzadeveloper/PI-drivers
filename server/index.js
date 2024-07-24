@@ -25,7 +25,7 @@
 //codigo viejo
 // require ("dotenv").config();
 const bodyParser = require('body-parser');
-const { conn } = require('./src/db.js');
+//const { conn } = require('./src/db.js');
 const { loadTeamsFromAPI } = require('./src/controllers/getAllTeams.js');
 //const server = require("./src/server");
 
