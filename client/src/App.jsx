@@ -20,7 +20,7 @@ function App() {
   const handleNameFilter = (e) => {
     setNameFilter(e.target.value);
   };
-
+  console.log(teamNames)
     // useEffect para setear el etado de teamNames con todos los equipos 
     useEffect(() => {
       // Llamar a la API para obtener los nombres de los equipos
