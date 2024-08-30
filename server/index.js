@@ -1,21 +1,33 @@
-require ("dotenv").config();
-const axios = require("axios");
-const server = require("./src/server");
-const { conn } = require('./src/db.js');
+require("dotenv").config();
 const express = require('express');
 const bodyParser = require('body-parser');
+const morgan = require('morgan');
+const cors = require('cors');
+const { conn } = require('./src/db.js');
 const { loadTeamsFromAPI } = require('./src/controllers/getAllTeams.js');
-const app = express()
-const PORT =  process.env.PORT 
+const routes = require('./src/routes/index.js'); 
 
-// Middleware para procesar JSON y URL-encoded bodies
+const app = express();
+const PORT = process.env.PORT || 3001; // Asegúrate de tener un valor por defecto
+
+// Middleware
+app.use(morgan('dev'));
+app.use(cors()); // Configura CORS antes de las rutas
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Rutas
+app.use('/', routes);
 
+// Sincroniza la base de datos y luego carga los equipos
 conn.sync({ force: false }).then(() => {
-  loadTeamsFromAPI();
-server.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
-})
-}).catch(error => console.error(error))
+  // Cargar equipos después de sincronizar la base de datos
+  loadTeamsFromAPI().catch(error => {
+    console.error('Error loading teams:', error);
+  });
+
+  // Inicia el servidor
+  app.listen(PORT, () => {
+    console.log(`Server listening on port ${PORT}`);
+  });
+}).catch(error => console.error('Database connection error:', error));
