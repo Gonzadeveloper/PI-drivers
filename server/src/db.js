@@ -99,6 +99,7 @@ Teams.belongsToMany(Driver, { through: "relations_table" });
 Driver.belongsToMany(Teams, { through: "relations_table" });
 
 module.exports = {
+  sequelize,
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize,     // para importar la conexión { conn } = require('./db.js');
 };

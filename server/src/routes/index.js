@@ -8,6 +8,10 @@ const { createDriver } = require('../controllers/PostDrivers');
 const { getDriverByName } = require('../controllers/getDriverByName');
 const { getAllDrivers } = require('../controllers/getAllDriversFromDb');
 const { getAllTeamNames } = require('../controllers/getAllTeamsFromdb');
+const { saveDriversFromApi } = require("../controllers/postDriversApiToDb");
+
+
+router.post('/postDbFromApi', saveDriversFromApi)
 
 router.get('/teamNames', getAllTeamNames);
 
