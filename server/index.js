@@ -22,9 +22,10 @@ app.use('/', routes);
 // Sincroniza la base de datos y luego carga los equipos
 conn.sync({ force: false }).then(() => {
   // Cargar equipos después de sincronizar la base de datos
-  loadTeamsFromAPI().catch(error => {
-    console.error('Error loading teams:', error);
-  });
+  // loadTeamsFromAPI().catch(error => {
+  //   console.error('Error loading teams:', error);
+  // });
+  //Comento el lecantamiento de equipos por api para desplegarlo en la nube
 
   // Inicia el servidor
   app.listen(PORT, () => {
