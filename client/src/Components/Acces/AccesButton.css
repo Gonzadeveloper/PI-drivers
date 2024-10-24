@@ -24,3 +24,59 @@
     background-color: black;
     color: white;
   }
+
+  /* Estilos para pantallas grandes (desktops) */
+@media (min-width: 1024px) {
+  .container h1 {
+    font-size: 6em;
+  }
+
+  .container p {
+    font-size: 1.5em;
+  }
+
+  .buttonAcces {
+    font-size: 1.2em;
+    height: 3.5em;
+    width: 10em;
+  }
+}
+
+/* Estilos para pantallas medianas (tablets y laptops pequeñas) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .container h1 {
+    font-size: 4.5em;
+  }
+
+  .container p {
+    font-size: 1.3em;
+  }
+
+  .buttonAcces {
+    font-size: 1.1em;
+    height: 3.2em;
+    width: 9.5em;
+  }
+}
+
+/* Estilos para pantallas pequeñas (smartphones) */
+@media (max-width: 767px) {
+  .container {
+    
+    padding: 0.5em;
+  }
+
+  .container h1 {
+    font-size: 3em;
+  }
+
+  .container p {
+    font-size: 1em;
+  }
+
+  .buttonAcces {
+    font-size: 0.9em;
+    height: 2.8em;
+    width: 8em;
+  }
+}

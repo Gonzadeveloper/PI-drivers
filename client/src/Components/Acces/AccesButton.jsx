@@ -9,7 +9,7 @@ const AccessButton = ({ setAccess, navigate }) => {
 
   return (
     <div className='container'>
-      <h1>Welcome to PI Drivers!</h1>
+      <h1 >Welcome to PI Drivers!</h1>
       
       <p>In this app you will be able to see all the F1 riders, you can also create your own riders and assign teams to them. Enjoy your stay</p>
       

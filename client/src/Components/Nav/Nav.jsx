@@ -6,43 +6,38 @@ import './Nav.css'
 export default function Nav({nameFilter,
     handleNameFilter}){
     
-    return <div className="header">
-        <div className="div_header">
-
-            <Link to='/Home'>
-
-                <div className="div_logo">
-                    <button> 
-                    <img src={logo} alt="logo" />
-                    </button>
+    return (
+            <div className="header">
+                
+                <div className="div_header">
+                    <Link to='/Home'>
+                        <div className="div_logo">
+                            <button> 
+                                <img src={logo} alt="logo" />
+                            </button>
+                        </div>
+                    </Link>
                 </div>
 
-            </Link>
-        </div>
+                <div className="div_Buttons">
+                    <Link to='/Home'>
+                        <button className="colors">Home</button>
+                    </Link>
 
-        <div className="div_Buttons">
+                    <Link to='/AtivitiForm'>
+                         <button className="colors">Create</button>
+                    </Link>
 
-            <Link to='/Home'>
-            <button className="colors">Home</button>
-            </Link>
-
-            <Link to='/AtivitiForm'>
-            <button className="colors">Create</button>
-            </Link>
-
-            <div>
-
+                    <input
+                        className="colors"
+                        type="text"
+                        placeholder="  Search by name"
+                        value={nameFilter}
+                        onChange={handleNameFilter}
+                    />
+                    </div>        
             </div>
-                <input
-                    className="colors"
-                    type="text"
-                    placeholder="  Search by name"
-                    value={nameFilter}
-                    onChange={handleNameFilter}
-            />
-
-        </div>        
-    </div>
+        )
 }
 
 

@@ -151,111 +151,116 @@ import React, { useState, useEffect } from "react";
     
       return (
         <div >
-          <form className="estilo_form" action="POST"  onSubmit={submit}>
-            <div  >
-              <h1>Create your Driver</h1>
-              <h1>You can relate it to one or more teams!</h1>
-              <p>
-                <label>Name of driver</label>
-                <input
-                  type="text"
-                  placeholder="  Name.."
-                  name="name"
-                  value={data.name}
-                  onChange={handleInputChange}
+          <div className="contenedorActivity">
+            <form className="estilo_form" action="POST"  onSubmit={submit}>
+              <div  >
+                <h1>Create your Driver</h1>
+                <h1>You can relate it to one or more teams!</h1>
+                <div className="div_inputs">
+                  <label>Name of driver</label>
+                  <input
+                    type="text"
+                    placeholder="  Name.."
+                    name="name"
+                    value={data.name}
+                    onChange={handleInputChange}
+                    
                   
-                
-                />
-              </p>
-              <p>
-                <label>Last Name</label>
-                <input
-                  type="text"
-                  name="last_name"
-                  placeholder="  Last Name"
-                  value={data.last_name}
-                  onChange={handleInputChange}
+                  />
+                </div>
+                <div className="div_inputs">
+                  <label>Last Name</label>
+                  <input
+                    type="text"
+                    name="last_name"
+                    placeholder="  Last Name"
+                    value={data.last_name}
+                    onChange={handleInputChange}
+                    
+                  />
+                </div>
+                <div className="div_inputs">
+                  <label>Image</label>
+                  <input
+                    type="text"
+                    name="image"
+                    placeholder="  Image"
+                    value={data.image}
+                    onChange={handleInputChange}
                   
-                />
-              </p>
-              <p >
-                <label>Image</label>
-                <input
-                  type="text"
-                  name="image"
-                  placeholder="  Image"
-                  value={data.image}
-                  onChange={handleInputChange}
-                 
-                />
-              </p>
-              <p >
-                <label>Birthdate</label>
-                      <input
-                        type="date"
-                        name="birthdate"
-                        value={data.birthdate}
-                        onChange={handleInputChange}
-                       
-                      />
-              </p>
-              <p >
-                <label>Nationality</label>
-                <input
-                  type="text"
-                  name="nationality"
-                  placeholder="  Nationality"
-                  value={data.nationality}
-                  onChange={handleInputChange}
-                  
-                />
-              </p>
-              <div className="teamsdiv">
+                  />
+                </div>
+                <div className="div_inputs">
+                  <label>Birthdate</label>
+                        <input
+                          type="date"
+                          name="birthdate"
+                          value={data.birthdate}
+                          onChange={handleInputChange}
+                        
+                        />
+                </div>
+                <div className="div_inputs">
+                  <label>Nationality</label>
+                  <input
+                    type="text"
+                    name="nationality"
+                    placeholder="  Nationality"
+                    value={data.nationality}
+                    onChange={handleInputChange}
+                    
+                  />
+                </div>
+                <div className="div_inputs">
 
-                <label className="teamslabel">Teams</label>
-                <CustomSelect  
-                  teamNames={teamNames} 
-                  selectedTeams={data.teams}
-                  onTeamsSelected={handleTeamsSelected}/>
+                  <label className="teamslabel">Teams</label>
+                  <CustomSelect  
+                    teamNames={teamNames} 
+                    selectedTeams={data.teams}
+                    onTeamsSelected={handleTeamsSelected}/>
+                </div>
+                
+                <div className="div_inputs">
+                  <label >Description</label>
+                  <textarea
+                    className="description"
+                    name="description"
+                    placeholder="Description"
+                    value={data.description}
+                    onChange={handleInputChange}
+                    
+                  />
+                </div>
               </div>
               
-              <p >
-                <label >Description</label>
-                <textarea
-                  className="description"
-                  name="description"
-                  placeholder="Description"
-                  value={data.description}
-                  onChange={handleInputChange}
-                  
-                />
-              </p>
+              <div className="container_button">
+                  <input type="submit" value="Create" />
+              </div>
+            </form>
+
+            <div className="container_h1">
+              <h1>This is yours drivers</h1>
             </div>
-            
-            <div className="container_button">
-                <input type="submit" value="Create" />
+          </div>
+
+
+            <div>
+              <div className="card_content">
+                {driversDbData.map((driver) => (
+                    <CardDriversDB
+                      id={driver.id}
+                      name={driver.name}
+                      last_name={driver.last_name}
+                      description={driver.description}
+                      image={driver.image}
+                      birthdate={driver.birthdate}
+                      nationality={driver.nationality}
+                      teams={driver.teams}
+                    />
+                )
+                )}
+              </div>
             </div>
-          </form>
-  
-          <div className="container_h1">
-            <h1>This is yours drivers</h1>
-          </div>
-  
-          <div className="card_content">
-            {driversDbData.map((driver) => (
-                <CardDriversDB
-                  id={driver.id}
-                  name={driver.name}
-                  last_name={driver.last_name}
-                  description={driver.description}
-                  image={driver.image}
-                  birthdate={driver.birthdate}
-                  nationality={driver.nationality}
-                  teams={driver.teams}
-                />
-            )
-            )}
-          </div>
         </div>
       );
     };

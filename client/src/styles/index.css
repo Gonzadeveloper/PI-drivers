@@ -2,18 +2,9 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
   background: url('../assets/drawing-white-illustration-digital-art-monochrome-black-background-696699-wallhere.com.jpg') center center fixed; /* Reemplaza 'ruta_de_tu_imagen.jpg' con la ruta de tu imagen */
   background-size: cover;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background-color: black; /* Fondo negro */
 }
 
