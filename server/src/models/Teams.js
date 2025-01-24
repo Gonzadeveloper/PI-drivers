@@ -1,17 +1,18 @@
-const { DataTypes } = require('sequelize')
+const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-    
-    sequelize.define('Teams',{
-        id:{
-            type:DataTypes.INTEGER,
-            allowNull:false,
-            primaryKey:true,
-            autoIncrement: true,
+    const Teams = sequelize.define('Teams', {
+        id: {
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4, // Asigna un UUID como ID por defecto
+            allowNull: false,
+            primaryKey: true,
         },
-        name:{
-            type:DataTypes.STRING,
-            allowNull:false,
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false,
         },
-    })
-}
+    });
+
+    return Teams;  // Devuelve el modelo correctamente
+};

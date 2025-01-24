@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from "react";
-  import axios from 'axios'
-  import CardDriversDB from "../card/CardDriversDB";
-  import './AtivitiForm.css'
-  import { useDispatch, useSelector } from "react-redux";
-  import CustomSelect from "./listCheck";
+import React, { useState } from "react";
+import './AtivitiForm.css'
+import CustomSelect from "./listCheck";
   
   export const Form = ({teamNames}) => {
   
-    const [driversDbData, setdriversDbData] = useState([]);// estado para ver los  conductores que estan en la BD
+
     const [reloadData, setReloadData] = useState(false); // Nuevo estado para forzar recarga de datos
     const [data, setData] = useState({
       name: "",
@@ -19,26 +16,7 @@ import React, { useState, useEffect } from "react";
       teams: [],
     });
     
-    const dispatch = (useDispatch)
     
-    useEffect(() => { //useEffect para traer los drivers de la db y setearlo al estado driversDbData
-    
-      const URL = `${import.meta.env.VITE_ENDPOINT}/driverFromApi`;
-  
-      const fetchData = async () => {
-        try {
-          const response = await axios.get(URL);
-          setdriversDbData(response.data);
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
-      };
-  
-      fetchData(); // Llama a la función sin invocarla para evitar el bucle infinito
-  
-    }, [reloadData]);
-    
-  
   
     const validate = (input) => { //funcion para validar que todos los campos sean requeridos 
       let errors = {};
@@ -237,30 +215,7 @@ import React, { useState, useEffect } from "react";
                   <input type="submit" value="Create" />
               </div>
             </form>
-
-            <div className="container_h1">
-              <h1>This is yours drivers</h1>
-            </div>
           </div>
-
-
-            <div>
-              <div className="card_content">
-                {driversDbData.map((driver) => (
-                    <CardDriversDB
-                      id={driver.id}
-                      name={driver.name}
-                      last_name={driver.last_name}
-                      description={driver.description}
-                      image={driver.image}
-                      birthdate={driver.birthdate}
-                      nationality={driver.nationality}
-                      teams={driver.teams}
-                    />
-                )
-                )}
-              </div>
-            </div>
         </div>
       );
     };

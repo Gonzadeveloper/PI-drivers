@@ -30,8 +30,8 @@ function Detail(){
                         <h4>description: {driversData.description}</h4>
                         <h4>nationality: {driversData.nationality}</h4>
                         <h4>birthdate: {driversData.birthdate}</h4>
-                        {driversData.team && driversData.team.name ? (
-                        <h4>Teams: {driversData.team.name}</h4>
+                        {driversData.team && driversData.team ? (
+                        <h4>Teams: {driversData.team}</h4>
                         ) : (
                         <h4>No team assigned</h4>
                         )}

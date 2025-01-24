@@ -3,32 +3,31 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const cors = require('cors');
-const { conn } = require('./src/db.js');
-const { loadTeamsFromAPI } = require('./src/controllers/getAllTeams.js');
+const { sequelize } = require("./src/models/index.js");
 const routes = require('./src/routes/index.js'); 
+const PORT = process.env.PORT || 3001; // Asegúrate de tener un valor por defecto
 
 const app = express();
-const PORT = process.env.PORT || 3001; // Asegúrate de tener un valor por defecto
 
 // Middleware
 app.use(morgan('dev'));
-app.use(cors()); // Configura CORS antes de las rutas
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors()); // Configura CORS antes de las rutas
+
 
 // Rutas
 app.use('/', routes);
 
-// Sincroniza la base de datos y luego carga los equipos
-conn.sync({ force: false }).then(() => {
-  // Cargar equipos después de sincronizar la base de datos
-  // loadTeamsFromAPI().catch(error => {
-  //   console.error('Error loading teams:', error);
-  // });
-  //Comento el lecantamiento de equipos por api para desplegarlo en la nube
+sequelize.sync({ force: false }) // Cuidado: esto borrará y creará las tablas de nuevo
+    .then(() => {
+        console.log('Tablas sincronizadas correctamente');
+    })
+    .catch(err => {
+        console.error('Error al sincronizar tablas:', err);
+    });
 
-  // Inicia el servidor
-  app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
-  });
-}).catch(error => console.error('Database connection error:', error));
+const server = app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
+});
+
+module.exports = app
