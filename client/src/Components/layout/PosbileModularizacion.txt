@@ -1,0 +1,132 @@
+Sí, modularizar la lógica del paginado y el filtrado es una muy buena idea. Esto te permitirá:
+
+Reutilizar código en otros componentes sin duplicarlo.
+Hacer el código más legible y mantenible al separar responsabilidades.
+Facilitar la depuración al aislar cada funcionalidad en módulos independientes.
+📌 Pasos para modularizar
+Crear un hook para el paginado (usePagination.js)
+Crear un hook para los filtros (useFilter.js)
+Importar y usar estos hooks en el Layout
+
+usePagination.js
+
+import { useState, useEffect } from "react";
+
+export function usePagination(items, itemsPerPage) {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  useEffect(() => {
+    setTotalPages(Math.ceil(items.length / itemsPerPage));
+  }, [items, itemsPerPage]);
+
+  const paginatedItems = items.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+  const goToPage = (pageNumber) => setCurrentPage(pageNumber);
+
+  return { currentPage, totalPages, paginatedItems, goToPage };
+}
+
+
+
+useFilter.js
+
+
+import { useState, useMemo } from "react";
+
+export function useFilter(data, nameFilter) {
+  const [selectedTeam, setSelectedTeam] = useState("All");
+
+  const normalizedFilter = nameFilter?.trim().toLowerCase() || "";
+
+  const filteredData = useMemo(() => {
+    return data.filter(driver => {
+      const teamName = Array.isArray(driver.teams)
+        ? driver.teams.join(", ").toLowerCase()
+        : driver.teams?.toLowerCase() || "";
+
+      return (
+        (normalizedFilter === "" || driver.name.toLowerCase().includes(normalizedFilter)) &&
+        (selectedTeam === "All" || teamName.includes(selectedTeam.toLowerCase()))
+      );
+    });
+  }, [data, normalizedFilter, selectedTeam]);
+
+  return { filteredData, selectedTeam, setSelectedTeam };
+}
+
+
+Layout.js
+
+
+import React from 'react';
+import { useSelector } from 'react-redux';
+import Card from '../card/Card';
+import imagen from '../../assets/03f1986b72f04f8e6b78d4f937abfd50.jpg';
+import './Layout.css';
+import { usePagination } from '../../hooks/usePagination';
+import { useFilter } from '../../hooks/useFilter';
+
+export default function Layout({ currentPage, setCurrentPage, teamNames, nameFilter }) {
+  const itemsPerPage = 10;
+  
+  // Obtener conductores del estado global
+  const driversData = useSelector((state) => state.drivers.list);
+
+  // Filtrar conductores
+  const { filteredData, selectedTeam, setSelectedTeam } = useFilter(driversData, nameFilter);
+
+  // Paginar conductores filtrados
+  const { currentPage: page, totalPages, paginatedItems, goToPage } = usePagination(filteredData, itemsPerPage);
+
+  return (
+    <div className='container_p'>
+      <div className='filters'>
+        <div className='filtros'>
+          <h3>Filter Teams:</h3>
+          <select className='selects' onChange={(e) => setSelectedTeam(e.target.value)} value={selectedTeam}>
+            <option value="All">Mostrar todos</option>
+            {teamNames.map((teamName) => (
+              <option key={teamName} value={teamName}>{teamName}</option>
+            ))}
+          </select>
+        </div>
+        <img src={imagen} alt="" />
+      </div>
+
+      <div className="card_content">
+        {paginatedItems.length > 0 ? (
+          paginatedItems.map((driver) => (
+            <Card key={driver.id} {...driver} />
+          ))
+        ) : (
+          <p>No hay datos de conductores disponibles.</p>
+        )}
+      </div>
+
+      <div className="pagination">
+        <button className='flechas' onClick={() => goToPage(1)}>{"<<"}</button>
+        <button className='flechas' onClick={() => goToPage(Math.max(page - 1, 1))}>{"<"}</button>
+        {[...Array(totalPages).keys()].map((num) => (
+          <button
+            key={num + 1}
+            onClick={() => goToPage(num + 1)}
+            className={num + 1 === page ? 'active page-button' : 'page-button'}
+          >
+            {num + 1}
+          </button>
+        ))}
+        <button className='flechas' onClick={() => goToPage(Math.min(page + 1, totalPages))}>{">"}</button>
+        <button className='flechas' onClick={() => goToPage(totalPages)}>{">>"}</button>
+      </div>
+    </div>
+  );
+}
+
+
+🎯 Beneficios de esta modularización
+✅ Separación de responsabilidades: usePagination se encarga del paginado, useFilter del filtrado.
+✅ Reutilización: Puedes usar estos hooks en otros componentes.
+✅ Código más limpio y mantenible: La lógica está bien organizada.
+
+🔹 Resultado: Ahora Layout.js solo se preocupa por renderizar los datos filtrados y paginados sin manejar toda la lógica interna. 🚀
